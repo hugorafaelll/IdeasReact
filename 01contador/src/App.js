@@ -21,8 +21,14 @@ const MostrarVoltas = (props)=> { //arow function função em flecha
 }
 
 const MostraTempo = (props) => {
+    const tempo = props.tempo
+    const minutos = Math.round(tempo/60)
+    const seconds = tempo % 60
+    const minutosStr = minutos <10 ? '0' + minutos: minutos
+    const secondsStr = seconds <10  ? '0' + seconds : seconds
+
   return (
-    <p>{props.tempo}<br/><br/>
+    <p>{`${minutos}:${seconds}`}<br/><br/>
     Tempo medio por Voltas
     </p>
   )
@@ -36,13 +42,20 @@ function App() {
   const [tempo,  setTempo] = useState(0)
 
   useEffect(() => {
-   
-    setInterval(() => {
-    console.log('funcionando 100%') },1000)
-    }, [runing]
-    )
+    let timer = null 
+    if(runing){   
+      timer =  setInterval(() => {
+        setTempo( old => old+1)
+   }, 1000)
+    }
+    return () =>{
+      if (timer){
+        clearInterval(timer)
+          }
+        }
+      }, [runing])
     
-const toggleRuning =() => {
+const toggleRuning =() => { // interruptor no runing 
   setRuning(!runing)
 }
  
@@ -52,17 +65,25 @@ const toggleRuning =() => {
   const decrement = () =>{
     setNumVoltas(numVoltas-1)}
 
-    
+    const reset = () => {
+      setNumVoltas(0)
+      setTempo(0)
+    }
 
 
   return (
     <div >
+    <p>Exercicio pratico para utilização de HOOK useState e UseEfect <br/>
+    cronometro para contagem de exercicios </p>
+    
+    <br/>
      <MostrarVoltas voltas={numVoltas}/> 
     <Button texto='+' onCLick={increment}/>
     <Button texto='-' onCLick={decrement}/>
     <MostraTempo tempo={tempo}/>
     <Button texto='Iniciar' onCLick={toggleRuning} />
-    <Button texto='Reiniciar'/>
+    <Button texto='Reiniciar' onCLick={reset} />
+   
     </div>
   );
 }
