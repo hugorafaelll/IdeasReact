@@ -31,27 +31,37 @@ const Button = (props) => <button onClick={props.onCLick}>{props.texto}</button>
 
 
 function App() {
-  let [numVoltas, setNumVoltas]=useState(32);
+  let [numVoltas, setNumVoltas]=useState(0);
+  const [runing,setRuning] = useState(false)
+  const [tempo,  setTempo] = useState(0)
+
+  useEffect(() => {
+   
+    setInterval(() => {
+    console.log('funcionando 100%') },1000)
+    }, [runing]
+    )
+    
+const toggleRuning =() => {
+  setRuning(!runing)
+}
+ 
+
   const increment = () =>{
     setNumVoltas(numVoltas+1)}
   const decrement = () =>{
     setNumVoltas(numVoltas-1)}
-  const [tempo, setTempo] = useState(0)
 
-  useEffect(() => {
-    setInterval(() => {
-      },1000)}, [])
-    
     
 
 
   return (
-    <div className='App'>
+    <div >
      <MostrarVoltas voltas={numVoltas}/> 
     <Button texto='+' onCLick={increment}/>
     <Button texto='-' onCLick={decrement}/>
     <MostraTempo tempo={tempo}/>
-    <Button texto='Iniciar'/>
+    <Button texto='Iniciar' onCLick={toggleRuning} />
     <Button texto='Reiniciar'/>
     </div>
   );
