@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+*{
+    font-family: 'Alfa Slab One', cursive;
+    text-align: center;
+}
+
+.number{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.span{
+    font-size: 100px;
+}
+
+button{
+    background-color:white;
+    border: 1px solid black;
+    font-size: 18px;
+    padding: 22px;
+    margin: 8px;
+}
+
+.timer{
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.bigger{
+    font-size: 33px;
+}

@@ -1,5 +1,10 @@
 import React , {useState, useEffect} from "react";
 
+import MostrarVoltas from "./mostravoltas";
+import MostraTempo from "./mostraTempo";
+import Button from "./button";
+import './styles.css'
+
 //toda vez que ultiliza letra Maiuscula o react sabe que e um componente 
 // e letra minuscula ele sabe que é ujm elemento 
 
@@ -10,31 +15,6 @@ import React , {useState, useEffect} from "react";
 
 //hook gancho com mundo esterno [ useStats, setUseState]
 //useEfect usa uma função somente quando estivermos chamando ela 
-
-const MostrarVoltas = (props)=> { //arow function função em flecha
-  return (
-    <p>{props.voltas}
-      <br/>
-      Voltas
-      </p>
-  )
-}
-
-const MostraTempo = (props) => {
-    const tempo = props.tempo
-    const minutos = Math.round(tempo/60)
-    const seconds = tempo % 60
-    const minutosStr = minutos <10 ? '0' + minutos: minutos
-    const secondsStr = seconds <10  ? '0' + seconds : seconds
-
-  return (
-    <p>{`${minutos}:${seconds}`}<br/><br/>
-    Tempo medio por Voltas
-    </p>
-  )
-}
-const Button = (props) => <button onClick={props.onCLick}>{props.texto}</button>
-
 
 function App() {
   let [numVoltas, setNumVoltas]=useState(0);
@@ -78,7 +58,7 @@ const toggleRuning =() => { // interruptor no runing
     
     <br/>
      <MostrarVoltas voltas={numVoltas}/> 
-    <Button texto='+' onCLick={increment}/>
+    <Button texto='+'  onCLick={increment}/>
     <Button texto='-' onCLick={decrement}/>
     <MostraTempo tempo={tempo}/>
     <Button texto='Iniciar' onCLick={toggleRuning} />
