@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import axios from 'axios';
 
 
@@ -20,17 +20,41 @@ import axios from 'axios';
 
 const url = 'https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao.json'
 
+const reducer = (state, action) => {  // função para manipular um estado 
+  // manipular meu estado 
+  if(action.type === 'REQUEST'){
+    return {
+      ...state,
+      loading:true
+    }
+  }
+  if(action.type === 'SUCCESS')
+  return{
+    ...state,
+    loading:false,
+    action: action.data
+    }
+ 
+  }
+
+
 function App() {
 
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState({})   //hook para mostrar na tela as "fotos"
+   
+  const [data, dispatch] = useReducer( reducer,{
+    loading:true,
+    data:{}
+  })
+  
+  
   useEffect( ()=>{ //hook para executar uma ação 
-    setLoading(true)
-    axios  // api firebase para trazer DATA
+
+    dispatch({type:'REQUEST'})
+    axios   // api firebase para trazer DATA
     .get(url)  // local da api
     .then(res =>{    //assyn com resposta da data no console
-      setData(res.data)
-      setLoading(false)
+      
+        dispatch ({type:'SUCCESS', data: res.data})
     })
   }, [] ) // []quer dizer que nao precisa de ningm para executar esta ação
 
@@ -38,8 +62,9 @@ function App() {
     <div >
       <h1>Financas</h1>
       {JSON.stringify(data)}
-     { loading && <p>CARREGANDO...</p>}
-          
+      { data.loading && <p>CARREGANDO...</p>}
+      
+      
     </div>
   );
 }
