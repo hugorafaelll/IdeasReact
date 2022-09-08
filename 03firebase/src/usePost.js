@@ -1,5 +1,5 @@
 //todos hooks comecam com use 
-import React ,{useReducer}from "react"
+import {useReducer}from "react"
 import axios from "axios"
 
 const reducer = (state, action) => {  // função para manipular um estado 
@@ -17,26 +17,23 @@ const reducer = (state, action) => {  // função para manipular um estado
       action: action.data
       }
    
-    }
+    } 
   
 
 const usePost = (url) => {
-
     const [data, dispatch] = useReducer( reducer,{
         loading:false,
         data:{}
       })
-      
-
     const post = data =>{
         dispatch ({type:'REQUEST'})
         axios
-        .post(url,data)
-        .then(res =>{
-            dispatch ({
-            type:'SUCCESS',
-            data:res.data
-        })
+            .post(url,data)
+            .then(res =>{
+                dispatch ({
+                type:'SUCCESS',
+                data: res.data
+            })
         })
     } 
     return [data , post]

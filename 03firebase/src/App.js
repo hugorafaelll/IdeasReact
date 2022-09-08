@@ -1,43 +1,24 @@
-import React, {useState, useEffect, useReducer} from "react";
-import axios from 'axios'; //api firebase
-import useGet from "./useGet"; //criar 
-import usePost from "./usePost"; // salvar
-import useDelete from "./useDelete"; //deletar
+import React  from "react";
+import Rest from "./rest";
 
-// axios
-// .get('https://financas-hugo-default-rtdb.firebaseio.com/valor.json')
-// .then(res => {
-//   console.log(res.data.chave)
-// }) 
+const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
 
 
-// axios
-// .post('https://financas-hugo-default-rtdb.firebaseio.com/valor.json', 
-// {
-//   outroDado :'hugo Rafael '
-// })
-// .then(res =>{
-//   console.log(res.data)
-// })
-
-const url = 'https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao.json'
-
-
-
+const { useGet, usePost , useDelete } = Rest(baseUrl)
 
 function App() {
 
-const data = useGet(url)
-const [postData, post] = usePost(url)
+const data = useGet('movimentacao/06-2022')
+const [postData, post] = usePost('movimentacao/06-2022')
 const [deleteData, remove] = useDelete()
 
  
 const saveNew = () =>{
-  post({valor:30, descricao:'add macararam'})
+  post({valor:17, descricao:'macararam'})
 } 
 
 const doRemove =() => {
-  remove('https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao/-NBSbdmXcHmTTYCkcLee.json')
+  remove('/movimentacao/-NBSbdmXcHmTTYCkcLee')
 }
 
   return (

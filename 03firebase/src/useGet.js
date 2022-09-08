@@ -1,5 +1,5 @@
 import axios from "axios"
-import React, { useReducer,useEffect } from "react"
+import { useReducer,useEffect } from "react"
 
 const reducer = (state, action) => {  // função para manipular um estado 
   // manipular meu estado 
@@ -39,7 +39,7 @@ const reducer = (state, action) => {  // função para manipular um estado
         
           dispatch ({type:'SUCCESS', data: res.data})
       })
-    }, [] ) // []quer dizer que nao precisa de ningm para executar esta ação
+    }) // []quer dizer que nao precisa de ningm para executar esta ação
     
     return data
 
