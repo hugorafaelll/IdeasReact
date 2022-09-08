@@ -1,7 +1,7 @@
 import React  from "react";
 import Rest from "./rest";
 
-const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
+const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/financas'
 
 
 const { useGet, usePost , useDelete } = Rest(baseUrl)
@@ -18,8 +18,7 @@ const saveNew = () =>{
 } 
 
 const doRemove =() => {
-  remove('/movimentacao/-NBSbdmXcHmTTYCkcLee')
-}
+ remove('/movimentacao/-NBSbdmXcHmTTYCkcLee')}
 
   return (
     <div >
