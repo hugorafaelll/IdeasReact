@@ -1,5 +1,27 @@
 import axios from "axios"
-import { useReducer } from "react"
+import React, { useReducer,useEffect } from "react"
+
+const reducer = (state, action) => {  // função para manipular um estado 
+  // manipular meu estado 
+  if(action.type === 'REQUEST'){
+    return {
+      ...state,
+      loading:true
+    }
+  }
+  if(action.type === 'SUCCESS')
+  return{
+    ...state,
+    loading:false,
+    action: action.data
+    }
+ 
+  }
+
+
+
+
+
   const useGet = url =>{
 
     const [data, dispatch] = useReducer( reducer,{

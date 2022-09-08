@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useReducer} from "react";
 import axios from 'axios';
-
-
+import useGet from "./useGet";
+import usePost from "./usePost";
 // axios
 // .get('https://financas-hugo-default-rtdb.firebaseio.com/valor.json')
 // .then(res => {
@@ -20,58 +20,28 @@ import axios from 'axios';
 
 const url = 'https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao.json'
 
-const reducer = (state, action) => {  // função para manipular um estado 
-  // manipular meu estado 
-  if(action.type === 'REQUEST'){
-    return {
-      ...state,
-      loading:true
-    }
-  }
-  if(action.type === 'SUCCESS')
-  return{
-    ...state,
-    loading:false,
-    action: action.data
-    }
- 
-  }
 
-  const useGet = url =>{
-
-    const [data, dispatch] = useReducer( reducer,{
-      loading:true,
-      data:{}
-    })
-    
-    
-    useEffect( ()=>{ //hook para executar uma ação 
-  
-      dispatch({type:'REQUEST'})
-      axios   // api firebase para trazer DATA
-      .get(url)  // local da api
-      .then(res =>{    //assyn com resposta da data no console
-        
-          dispatch ({type:'SUCCESS', data: res.data})
-      })
-    }, [] ) // []quer dizer que nao precisa de ningm para executar esta ação
-    
-    return data
-
-  }
- 
 
 
 function App() {
 
 const data = useGet(url)
+const [postData, post] = usePost(url)
 
+
+
+const saveNew = () =>{
+  post({valor:30, descricao:'add macararam'})
+} 
+
+console.log(postData)
   return (
     <div >
       <h1>Financas</h1>
       {JSON.stringify(data)}
-      { data.loading && <p>CARREGANDO...</p>}
-      
+      { data.loading && <p>CARREGANDO...</p>}<br></br>
+      <button onClick={saveNew} >Salvar</button>
+      <pre>{JSON.stringify(postData)}</pre>
       
     </div>
   );
