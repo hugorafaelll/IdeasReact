@@ -30,14 +30,13 @@ const useDelete = () => {
 
     const remove = url =>{
         dispatch ({type:'REQUEST'})
-        axios
+        axios 
             .delete(url)
             .then(()=>{
                 dispatch ({
-                type:'SUCCESS',
-              
+                type:'SUCCESS'
             })
-        })
+        }) 
     } 
     return [data , remove]
 }

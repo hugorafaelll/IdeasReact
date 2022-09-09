@@ -1,15 +1,20 @@
 import React  from "react";
 import Rest from "./rest";
+// import axios from "axios";
+ 
 
-const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/financas'
+// const url = 'https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao/06-2022.json'
 
 
-const { useGet, usePost , useDelete } = Rest(baseUrl)
+// const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao/'
+
+
+const { useGet, usePost , useDelete } = Rest()
 
 function App() {
 
-const data = useGet('movimentacao/06-2022')
-const [postData, post] = usePost('movimentacao/06-2022')
+const data = useGet()
+const [postData, post] = usePost()
 const [deleteData, remove] = useDelete()
 
  
@@ -18,7 +23,7 @@ const saveNew = () =>{
 } 
 
 const doRemove =() => {
- remove('/movimentacao/-NBSbdmXcHmTTYCkcLee')}
+ remove('')}
 
   return (
     <div >
