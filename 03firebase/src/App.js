@@ -1,39 +1,52 @@
-import React  from "react";
-import Rest from "./rest";
+import React ,{useState,useEffect,useReducer}from "react";
 import axios from "axios";
 
-const url = 'https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao.json'
-const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/financas'
+const url =   'https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao/06-2022/01.json'
 
-
-const { useGet, usePost , useDelete } = Rest(baseUrl)
+//função pura ... posso usar esta mesma função com outros parametros mais facil de testar
+const reducer = ( state, action) => {
+  if(action.type === 'REQUEST'){
+    return {
+      ...state,
+      loading:true
+    }
+  }
+  if(action.type === 'SUCCESS'){
+    return{
+      ...state,
+      loading:false,
+      data:action.data
+    }
+  }
+  return state
+}
 
 function App() {
-
-const data = useGet('/movimentacao/06-2022')
- const [postData, post] = usePost('/movimentacao/06-2022')
- const [deleteData, remove] = useDelete('/movimentacao/06-2022')
+  const [data, dispatch] = useReducer(reducer,{
+    loading:true,
+    data:{}
+  })
+  useEffect(() =>{
+      dispatch({type:'REQUEST'})
+      axios
+      .get(url)
+      .then(res => {
+        dispatch({type:'SUCCESS', data:res.data})
+      })
 
  
-const saveNew = () =>{post({valor:17, descricao:'macararam'})
-} 
+  },[]) //> [] significa que e independente e vai rodar apenas da primeira vez
 
-const doRemove =() => {
- remove(url)}
 
   return (
     <div >
       <h1>Financas</h1><span>learn about Hooks</span>
       <h4> Biblioteca - CRUD consumo api REST</h4>
-      
-      
-      
-      {JSON.stringify(data)}
-      { data.loading && <p>CARREGANDO...</p>}<br></br>
-      <button onClick={saveNew} >Salvar</button>
-      <pre>{JSON.stringify(postData)}</pre>
-      <button onClick={doRemove} >Remover</button>
-      <pre>{JSON.stringify(deleteData)}</pre>
+
+
+      <h4>Aplicação</h4>
+       {JSON.stringify(data)} 
+       {data.loading && <p>Loading...</p>}
     </div>
   );
 }
