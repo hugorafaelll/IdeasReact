@@ -41,4 +41,8 @@ const useDelete = () => {
     return [data , remove]
 }
 
+
+const doRemove =() => {  //função retirada do app
+  remove()}
+
 export default useDelete

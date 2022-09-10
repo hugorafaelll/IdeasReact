@@ -1,8 +1,9 @@
 import { useReducer,useEffect } from "react";
 import axios from "axios";
 
+//reducer se repete bastante
 
-const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao/'
+const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/financas'
 
 const reducer = (state, action) => {  // função para manipular um estado  
     if(action.type === 'REQUEST'){
@@ -39,7 +40,7 @@ const init = baseUrl => {
         return data
     } 
 
-    const usePost = resource => {
+    const usePost = (resource) => {
     const [data, dispatch] = useReducer( reducer,{
         loading:false,
         data:{}
