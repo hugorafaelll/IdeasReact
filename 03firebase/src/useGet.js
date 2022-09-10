@@ -1,50 +1,41 @@
+import { useReducer, useEffect } from "react"
 import axios from "axios"
-import { useReducer,useEffect } from "react"
 
-const reducer = (state, action) => {  // função para manipular um estado 
-  if(action.type === 'REQUEST'){
-    return {
-      ...state,
-      loading:true
+//função pura ... posso usar esta mesma função com outros parametros mais facil de testar
+const reducer = ( state, action) => {
+    if(action.type === 'REQUEST'){
+      return {
+        ...state,
+        loading:true
+      }
     }
-  }
-  if(action.type === 'SUCCESS')
-  return{
-    ...state,
-    loading:false,
-    action: action.data
+    if(action.type === 'SUCCESS'){
+      return{
+        ...state,
+        loading:false,
+        data:action.data
+      }
     }
- 
+    return state
   }
-
-
- 
-  const saveNew = () =>{  //função para postar 
-    post({valor:17, descricao:'macararam'})
-  }
-
-
-  const useGet = url =>{
-
-    const [data, dispatch] = useReducer( reducer,{ // dispatch dispara uma ação no reducer 
+  
+  
+  const useGet = url => {
+    const [data, dispatch] = useReducer(reducer,{
       loading:true,
       data:{}
-    }) 
-    
-    
-    useEffect( ()=>{ //hook para executar uma ação 
+    })
+    useEffect(() =>{
+        dispatch({type:'REQUEST'})
+        axios
+        .get(url)
+        .then(res => {
+          dispatch({type:'SUCCESS', data:res.data})
+        })
   
-      dispatch({type:'REQUEST'}) // para disparar uma ação
-      axios   // api firebase para trazer DATA
-      .get(url)  // local da api
-      .then(res =>{    //assyn com resposta da data no console
-        
-          dispatch ({type:'SUCCESS', data: res.data})
-      })
-    },[]) // []quer dizer que nao precisa de ningm para executar esta ação
-    
-    return data
-
+   
+    },[]) //> [] significa que e independente e vai rodar apenas da primeira vez
+      return data // quem eu quero mostrar do lado de fora 
   }
- 
+
   export default useGet
