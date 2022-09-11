@@ -1,48 +1,41 @@
-//todos hooks comecam com use 
-import {useReducer} from "react"
 import axios from "axios"
+import { useReducer } from "react"
 
-const reducer = (state, action) => {  // função para manipular um estado 
-    // manipular meu estado 
+
+
+const reducer = ( state, action) => {
     if(action.type === 'REQUEST'){
       return {
         ...state,
         loading:true
       }
     }
-    if(action.type === 'SUCCESS')
-    return{
-      ...state,
-      loading:false,
-      action: action.data
-      }
-   
-    }
-  
-
-const useDelete = () => {
-
-    const [data, dispatch] = useReducer( reducer,{
+    if(action.type === 'SUCCESS'){
+      return{
+        ...state,
         loading:false,
+        data:action.data
+      }
+    }
+    return state
+  }
+
+
+const useDelete =() => {
+    const [data, dispatch] = useReducer(reducer,{
+        loading:true,
         data:{}
       })
-      
-
-    const remove = url =>{
-        dispatch ({type:'REQUEST'})
-        axios 
-            .delete(url)
-            .then(()=>{
-                dispatch ({
+    const remove = url => {
+        dispatch({type:'REQUEST'})
+        axios
+        .delete(url)
+        .then(()=> {
+            dispatch({
                 type:'SUCCESS'
             })
-        }) 
-    } 
-    return [data , remove]
-}
-
-
-const doRemove =() => {  //função retirada do app
-  remove()}
-
+        })
+    }
+    return [data,remove]
+ } 
 export default useDelete
