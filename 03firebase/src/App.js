@@ -1,20 +1,21 @@
 import React from "react";
-import useGet from "./useGet";
-import usePost from "./usePost";
-import useDelete from "./useDelete";
+import Rest from "./rest";
 
-const url =   'https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao/06-2022/01.json'
+const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
+
+const {useGet,usePost, useDelete} = Rest(baseUrl)
 
 function App() {
-  const data = useGet(url)
-  const [postData,post] = usePost(url)
+  const data = useGet('financas/movimentacao/06-2022/01')
+  const [postData,post] = usePost('financas/movimentacao/06-2022/01')
   const [deleteData, remove] = useDelete()
 
   const saveNew =() =>{
-    post ({valor:25,descrição:'cabelo'})
+    post ({valor:77,descrição:'valor'})
   }
 const doRemove = () =>{ 
-  remove('https://financas-hugo-default-rtdb.firebaseio.com/financas/movimentacao/06-2022/-NBh95HqryGXcEzWyfKj.json')
+  remove('financas/movimentacao/06-2022/-NBbo1lDS1kOTQ2ED7j9')
+  
 }
 
   //JSON.stringfy maneira de inspecionar o que tem dentro do objeto
