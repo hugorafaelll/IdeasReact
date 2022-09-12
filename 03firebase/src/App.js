@@ -1,20 +1,24 @@
 import React from "react";
 import Rest from "./rest";
+import Header from "./elements/header";
+
+
 
 const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
 
 const {useGet,usePost, useDelete} = Rest(baseUrl)
 
 function App() {
-  const data = useGet('financas/movimentacao/06-2022/01')
-  const [postData,post] = usePost('financas/movimentacao/06-2022/01')
-  const [deleteData, remove] = useDelete()
+  const data = useGet('/meses')
+ // const data = useGet('financas/movimentacao/06-2022/01')
+  // const [postData,post] = usePost('financas/movimentacao/06-2022/01')
+  // const [deleteData, remove] = useDelete()
 
   const saveNew =() =>{
-    post ({valor:77,descrição:'valor'})
+  //  post ({valor:77,descrição:'valor'})
   }
 const doRemove = () =>{ 
-  remove('financas/movimentacao/06-2022/-NBbo1lDS1kOTQ2ED7j9')
+ // remove('financas/movimentacao/06-2022/-NBbo1lDS1kOTQ2ED7j9')
   
 }
 
@@ -22,19 +26,67 @@ const doRemove = () =>{
 
   return (
     <div >
-      <h1>Financas</h1><span>learn about Hooks</span>
-      <h4> Biblioteca - CRUD consumo api REST</h4>
- 
+      <Header/>
+        <div className="container" >
+        <h2>Adicionar mes</h2>
+        <select>
+        <option value='2020'>2020</option>
+        <option value='2021'>2021</option>
+        <option value='2022'>2022</option>
+        </select>
+        <select>
+        <option value='01'>01</option>
+        <option value='02'>02</option>
+        <option value='03'>03</option>
+        </select>
+        <button>Adicionar Mes</button>
+
+        {
+          data.loading && <span>... Carregando</span>
+        }
+        {
+          !data.loading && (
+            <table className="table">
+              <thead>
+                <tr>
+                    <th>Entrada</th>
+                    <th>valor</th>
+                    <th>saida</th>
+                    <th>valor</th>
+                </tr>
+              </thead>
+              <tbody>
+              {
+                Object
+                  .keys(data.data)
+                  .map(mes =>{
+                    return(
+                      <tr key={mes}>
+                          <td>{mes}</td>
+                          <td>{data.data[mes].entrada}</td>
+                          <td>{data.data[mes].valor}</td>
+                          <td>{data.data[mes].saida}</td>
+                          <td>{data.data[mes].valor}</td>
+                       </tr>
+                    )
+                  })
+              }
+              
+              
+              </tbody>
+              </table>
+              
+              
+              )
+            }
+            <pre>{JSON.stringify(data)}</pre>
+     
+  
  
 
+        </div>
 
-      <h4>Aplicação</h4>
-       {JSON.stringify(data)} 
-       {data.loading && <p>Loading...</p>} <br></br>
-       <button onClick={saveNew}> Salvar </button>
-       <pre>{JSON.stringify(postData)}</pre> 
-       <button onClick={doRemove}> DELETAR </button>
-       <pre>{JSON.stringify(deleteData)}</pre> 
+     
     </div>
   );
 }
