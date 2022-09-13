@@ -1,5 +1,5 @@
 import React from "react";
-import Rest from './rest';
+import Rest from '../utils/rest'
 import { Link } from "react-router-dom";
 
 const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
@@ -11,6 +11,7 @@ const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
     if(data.loading){
     return   <span>... Carregando</span>
     }
+    if(Object.keys(data.data).length>0){
     return(
     <table className="table">
     <thead>
@@ -39,6 +40,8 @@ const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
 </tbody>
 </table>
 )
+}
+return null
 }
 
 export default Meses

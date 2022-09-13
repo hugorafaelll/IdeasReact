@@ -1,6 +1,7 @@
 import React from "react";
-import Meses from "../meses";
-import AdicionarMes from "../adicionarMes";
+import Meses from "./meses";
+import AdicionarMes from "./adicionarMes";
+
 
 
 

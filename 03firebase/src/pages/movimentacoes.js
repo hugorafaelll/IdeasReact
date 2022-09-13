@@ -1,11 +1,12 @@
 import React from "react";
 
-
-const Movimentaçoes = () => {
+const Movimentacoes = (props) => {
     return(
-      <h1>Movimentaçoes</h1>
-     
+      <div className="container">
+      <h1 className="color red">Movimentaçoes</h1>
+      <pre>{JSON.stringify(props)}</pre>
+      </div> 
     )
   }
 
-  export default Movimentaçoes
+  export default Movimentacoes
