@@ -1,18 +1,13 @@
 import React from "react";
-import {BrowserRouter as Router } from "react-router-dom";
-import { Route , Link, Routes } from "react-router-dom";
+import {BrowserRouter as Router,Route , Link, Routes } from "react-router-dom";
 import Header from "./elements/header";
 import Meses from "./meses";
 import AdicionarMes from "./adicionarMes";
+import Movimentaçoes from "./pages/movimentacoes";
+import Home from "./pages/Home";
 
-const Home = () =>{
-  return(
-  <div className="container" >
-    <AdicionarMes/>
-    <Meses/>
-  </div>
-  )
-}
+
+
 
 function App() {
   return (
@@ -22,6 +17,7 @@ function App() {
          <Home/>
          <Routes>
          <Route path="/" exact component={Home} />
+         <Route path="/movimentacoes/04" exact component={Movimentaçoes} />
          </Routes>
       </div>
    </Router>

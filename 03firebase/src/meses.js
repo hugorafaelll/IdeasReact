@@ -1,5 +1,6 @@
 import React from "react";
 import Rest from './rest';
+import { Link } from "react-router-dom";
 
 const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
 
@@ -27,8 +28,7 @@ const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
         .map(mes =>{
             return(
             <tr key={mes}>
-                <td>{mes}</td>
-                <td>{data.data[mes].entrada}</td>
+                <td><Link to={`/movimentacoes/${mes}`}>{mes}</Link></td>
                 <td>{data.data[mes].valor}</td>
                 <td>{data.data[mes].saida}</td>
                 <td>{data.data[mes].valor}</td>
