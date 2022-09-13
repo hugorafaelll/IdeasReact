@@ -3,7 +3,7 @@ import Rest from './rest';
 
 const baseUrl = 'https://financas-hugo-default-rtdb.firebaseio.com/'
 
-    const {useGet,usePost, useDelete} = Rest(baseUrl)
+    const {useGet} = Rest(baseUrl)
 
     const Meses = () => {
     const data = useGet('meses')
