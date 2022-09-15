@@ -37,8 +37,7 @@ const usePost =(url) => {
     .then(res => {
         dispatch({
             type:'SUCCESS',
-            data:res.data
-        })
+            data:res.data})
     })
   }
 
