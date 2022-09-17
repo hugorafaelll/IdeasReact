@@ -1,10 +1,18 @@
-import React from "react";
+import './App.css';
+import Form from './components/form';
+import CheckboxList from './components/todos';
+import { Container } from '@mui/material';
+
 
 function App() {
   return (
-    <h1>teste</h1>
-  
+
+    <Container maxWidth='xs'>
+    <Form />
+    <CheckboxList />
+    </Container> 
   );
 }
+
 
 export default App;
