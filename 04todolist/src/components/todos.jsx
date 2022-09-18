@@ -11,10 +11,10 @@ import { Paper } from "@mui/material";
 
 export default function CheckboxList({todo}) {
   return (
-    <Paper  >
+    <Paper style={{ padding:'0.5em '}} >
       <ListItem
         secondaryAction={
-          <IconButton edge="end" aria-label="comments">
+          <IconButton edge="end" aria-label="delete"  >
             <DeleteIcon />
           </IconButton>
         }
@@ -24,7 +24,7 @@ export default function CheckboxList({todo}) {
           <ListItemIcon>
             <Checkbox edge="start" tabIndex={-1} disableRipple />
           </ListItemIcon>
-          <ListItemText primary={`Item Lista`} />
+          <ListItemText primary={todo.text} />
         </ListItemButton>
       </ListItem>
     </Paper>
