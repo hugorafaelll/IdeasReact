@@ -6,8 +6,10 @@ import { red } from '@mui/material/colors'
 export default function Form() {
   return (
     <Paper style={{ padding:"1em"}}>
-    <TextField id="outlined-basic" label="To-Do" variant="outlined" />
-    <Button variant="text">Send</Button>
+    <div style={{ display:'flex', justifyContent:'center'}}>
+    <TextField id="outlined-basic" label="Tarefas" variant="outlined" fullWidth />
+    <Button variant="text">Add</Button>
+    </div>
     </Paper>
   )
 }
