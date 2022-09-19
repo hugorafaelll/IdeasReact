@@ -8,11 +8,13 @@ export default function Home() {
 const [todos, setTodos]= useState([])
 
 const addTodo = (todo) =>{
-  setTodos([...todos,todo]); // pega todo array todos ...  e adiciona o novo todo gerado pelo map 
+  setTodos([...todos,todo]);// pega todo array todos ...  e adiciona o novo todo gerado pelo map 
 }
 
-const deleteTodo =(id) =>{
-    console.log(todo.id)
+
+const deleteTodo = (id) =>{
+ let filtrado = todos.filter((todo) =>todo.id !==id);
+  setTodos(filtrado)
 }
 
 
@@ -23,11 +25,12 @@ const deleteTodo =(id) =>{
             <List sx={{ width: '100%',  marginTop:'1em'}} >
             {todos.map( (todo , key) =>( 
                 <div key={todo.id} style={{marginTop:'1em'}} >
-                    <CheckboxList  todo={todo} />
+                    <CheckboxList todo={todo} deleteTodo={deleteTodo}/>
                 </div>
             ) )}
             </List>
     </Container> 
     </div>
+    
   )
 }

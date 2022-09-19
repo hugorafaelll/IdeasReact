@@ -9,12 +9,13 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Paper } from "@mui/material";
 
-export default function CheckboxList({todo}) {
+export default function CheckboxList({ todo, deleteTodo}) {
+
   return (
     <Paper style={{ padding:'0.5em '}} >
       <ListItem
         secondaryAction={
-          <IconButton edge="end" aria-label="delete"  >
+          <IconButton edge="end" aria-label="delete" onClick={()=> deleteTodo(todo.id)} >
             <DeleteIcon />
           </IconButton>
         }

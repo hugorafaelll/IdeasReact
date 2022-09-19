@@ -9,8 +9,10 @@ export default function Form({ addTodo }) {
   const todoCreate = (text) => {   // criando um objeto para todos itens ter id
       const todoObj = {text:text, id:id};
       setId(id+1);
-      addTodo(todoObj)
+      addTodo(todoObj);
+      document.getElementById("outlined-basic").value=null
   }
+
 
 
   return (
