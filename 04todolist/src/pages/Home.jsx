@@ -26,7 +26,9 @@ export default function Home() {
       }
     }
 
- 
+    // console.log(todosArray);
+    // todosArray.splice(todosArray.id, 1, { text: editedText, id: id });
+    // console.log(todosArray);
     setTodos(todosArray);
   };
   return (
@@ -35,7 +37,8 @@ export default function Home() {
         <Form addTodo={addTodo} />
         <List sx={{ width: "100%", marginTop: "1em" }}>
           {todos.map((todo, key) => (
-            <div key={todo.id} style={{ marginTop: "1em" }}>
+            <div key={todo.id} 
+            style={{ marginTop: "1em" }}>
               <CheckboxList
                 todo={todo}
                 editTodo={editTodo}

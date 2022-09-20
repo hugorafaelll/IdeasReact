@@ -14,14 +14,13 @@ export default function CheckboxList({ todo, deleteTodo, editTodo }) {
   const [openDialog, setOpenDialog] = React.useState(false);
 
   const dialogHandler = () => {
-    setOpenDialog(false);
+    setOpenDialog(!openDialog);
   };
+
+
   return (
     <Paper style={{ padding: "0.5em " }}>
-      <DialogForm
-       open={openDialog}
-        dialogHandler={dialogHandler}
-         todo={todo} />
+      <DialogForm open={openDialog} dialogHandler={dialogHandler} todo={todo} />
       <ListItem
         secondaryAction={
           <IconButton
