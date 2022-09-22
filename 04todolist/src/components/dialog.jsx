@@ -1,10 +1,8 @@
-
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TextField } from "@mui/material";
@@ -13,11 +11,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditTodoDialog({ open, dialogHandler, todo, editTodo }) {
+
+export default function EditTodoDialog({ open, dialogHandler, todo, textoEditado }) {
   const [editedText, setEditedText] = React.useState(todo.text);
 
   const textHandler = () => {
-    editTodo(todo.id, editedText);
+   const  textoEditado =(todo.id, editedText);
     dialogHandler();
   };
 
@@ -30,7 +29,7 @@ export default function EditTodoDialog({ open, dialogHandler, todo, editTodo }) 
       aria-describedby="alert-dialog-slide-description"
       fullWidth
     >
-      <DialogTitle>{"Editando TAREFAAAA"}</DialogTitle>
+      <DialogTitle>{"Edit Task"}</DialogTitle>
       <DialogContent>
         <TextField
           defaultValue={editedText}

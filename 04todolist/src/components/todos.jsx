@@ -10,7 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Paper } from "@mui/material";
 import DialogForm from "./dialog";
 
-export default function CheckboxList({ todo, deleteTodo, editTodo }) {
+export default function CheckboxList({ todo,deleteTodo }) {
   const [openDialog, setOpenDialog] = React.useState(false);
 
   const dialogHandler = () => {
