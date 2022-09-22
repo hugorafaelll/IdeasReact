@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -21,17 +22,25 @@ export default function EditTodoDialog({ open, dialogHandler, todo, editTodo }) 
   };
 
   return (
-    <Dialog open={open} onClose={dialogHandler} fullWidth>
-      <DialogTitle>Task Description</DialogTitle>
+    <Dialog
+      open={open}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={dialogHandler}
+      aria-describedby="alert-dialog-slide-description"
+      fullWidth
+    >
+      <DialogTitle>{"Editando TAREFAAAA"}</DialogTitle>
       <DialogContent>
         <TextField
           defaultValue={editedText}
-          onChange={(e) => setEditedText(e.target.value)}
           fullWidth
+          onChange={(e) => setEditedText(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
-      <Button onClick={textHandler}>Ok</Button>
+        <Button onClick={dialogHandler}>Cancelar</Button>
+        <Button onClick={textHandler}>Ok</Button>
       </DialogActions>
     </Dialog>
   );
