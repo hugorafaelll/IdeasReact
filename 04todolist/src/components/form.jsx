@@ -17,7 +17,7 @@ export default function Form({ addTodo }) {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <TextField
           id="outlined-basic"
-          label="Tarefa"
+          label="Task"
           variant="outlined"
           onChange={(e) => setText(e.target.value)}
           fullWidth
