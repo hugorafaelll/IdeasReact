@@ -13,8 +13,8 @@ export default function Form({ addTodo }) {
   };
 
   return (
-    <Paper style={{ padding: "1em" }}>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+    <Paper variante style={{ padding: "1em" }}>
+      <div style={{ display: "flex"}}>
         <TextField
           id="outlined-basic"
           label="Task"
@@ -26,6 +26,8 @@ export default function Form({ addTodo }) {
           Add
         </Button>
       </div>
+
+      
     </Paper>
   );
 }

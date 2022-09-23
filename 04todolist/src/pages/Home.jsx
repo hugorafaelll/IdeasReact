@@ -1,7 +1,10 @@
-import { Container, List } from "@mui/material";
+import { Container, List} from "@mui/material";
 import React, { useState } from "react";
 import Form from "../components/Form";
+import ResponsiveAppBar from "../components/navbar";
 import TodoItem from "../components/TodoItem";
+import ListItemIcon from "@mui/material";
+
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
@@ -23,22 +26,28 @@ export default function Home() {
       }
     }
 
-    // console.log(todosArray);
-    // todosArray.splice(todosArray.id, 1, { text: editedText, id: id });
-    // console.log(todosArray);
     setTodos(todosArray);
   };
 
   return (
-    <Container maxWidth="xs" style={{ marginTop: "1em" }}>
-      <Form addTodo={addTodo} />
-      <List sx={{ marginTop: "1em" }}>
-        {todos.map((todo) => (
-          <div key={todo.id} style={{ marginTop: "1em" }}>
-            <TodoItem editTodo={editTodo} todo={todo} deleteTodo={deleteTodo} />
-          </div>
-        ))}
-      </List>
+    <Container style={{ marginTop: "1em" }}>
+      <ResponsiveAppBar></ResponsiveAppBar>
+      <div>
+        <Form addTodo={addTodo} />
+        <List sx={{ marginTop: "1em" }}>
+          {todos.map((todo) => (
+            <div key={todo.id} style={{ marginTop: "1em" }}>
+              <TodoItem
+                editTodo={editTodo}
+                todo={todo}
+                deleteTodo={deleteTodo}
+              />
+            </div>
+          ))}
+        </List>
+      </div>
+
+  
     </Container>
   );
 }
