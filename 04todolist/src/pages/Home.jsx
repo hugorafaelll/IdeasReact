@@ -30,7 +30,7 @@ export default function Home() {
   };
 
   return (
-    <Container style={{ marginTop: "1em" }}>
+    <Container style={{ marginTop: "1em" }} maxWidth="sm">
       <ResponsiveAppBar></ResponsiveAppBar>
       <div>
         <Form addTodo={addTodo} />
