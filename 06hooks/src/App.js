@@ -1,5 +1,6 @@
 import { Container, Button } from "@mui/material";
 import { useState } from "react";
+import SegundoHook from "./components/useEfect";
 import PrimeiroHook from "./components/usestate";
 
 function App() {
@@ -30,8 +31,9 @@ function App() {
         {showContent && <PrimeiroHook/>}
         &nbsp;
         <Button variant="outlined" onClick={handleContent}>
-        useState
+        useEffect
       </Button>
+      <SegundoHook/>
      
      
     </Container>
