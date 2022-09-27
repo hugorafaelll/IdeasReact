@@ -1,6 +1,7 @@
 import { Container, Button } from "@mui/material";
 import { useState } from "react";
 import SegundoHook from "./components/useEfect";
+import TerceiroHook from "./components/useRef";
 import PrimeiroHook from "./components/usestate";
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
         useEffect
       </Button>
       <SegundoHook/>
-     
+      <TerceiroHook/>
      
     </Container>
   );
