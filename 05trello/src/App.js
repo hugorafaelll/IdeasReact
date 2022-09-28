@@ -11,7 +11,7 @@ const inicialItems = [
 
 const inicialColumns = [
   {
-    name: "Solicitado",
+    name: "Required",
     id: "1",
     items: inicialItems,
   },
