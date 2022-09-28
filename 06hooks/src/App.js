@@ -1,6 +1,7 @@
 import { Container, Button } from "@mui/material";
 import { useState } from "react";
 import SegundoHook from "./components/useEfect";
+import UseMemoM from "./components/useReducer";
 import UseReducerM from "./components/useReducer";
 import TerceiroHook from "./components/useRef";
 import RefInteractingWithDown from "./components/useRefWithDom";
@@ -40,6 +41,7 @@ function App() {
       <TerceiroHook/>
       <RefInteractingWithDown />
       <UseReducerM />
+      <UseMemoM/>
      
     </Container>
   );

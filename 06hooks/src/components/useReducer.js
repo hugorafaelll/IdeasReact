@@ -2,7 +2,7 @@ import { useReducer } from 'react'
 
 
 
-function UseReducerM () {
+function UseMemoM () {
     
 const initialState = {count: 0 };
 
@@ -33,4 +33,4 @@ const [state, dispatch ] = useReducer(reducer, initialState);
 }
  
 
-export default UseReducerM
+export default UseMemoM
