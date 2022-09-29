@@ -12,27 +12,78 @@ const inicialItems = [
 const inicialColumns = [
   {
     name: "Required",
-    id: "1",
+    id: "221",
     items: inicialItems,
   },
   {
     name: "To do",
+    id:'222',
     items:[]
   
   },
   {
     name: "In Process",
+    id:'223',
     items:[]
   
   },
   {
     name: "Done",
+    id:'227',
     items:[]
   },
 ];
 
 function App() {
   const [columns, setColumns] = useState(inicialColumns);
+
+  const onDragEnd = (result) => {
+    console.log(result);
+    // var sourceColumnItems = columns[0].items;
+    var sourceColumnItems = [];
+    var destinationColumnItems = [];
+    var draggedItem = {};
+
+    var sourceColumnId = 0;
+    var destinationColumnId = 0;
+
+    for (var i in columns) {
+      if (columns[i].id == result.source.droppableId) {
+        sourceColumnItems = columns[i].items;
+        sourceColumnId = i;
+      } else if (columns[i].id == result.destination.droppableId) {
+        destinationColumnItems = columns[i].items;
+        destinationColumnId = i;
+      }
+    }
+    // console.log(sourceColumnItems)
+    // console.log(destinationColumnItems)
+
+    for (var i in sourceColumnItems) {
+      if (sourceColumnItems[i].id == result.draggableId) {
+        draggedItem = sourceColumnItems[i];
+      }
+    }
+    // Excluí o objeto arrastado.
+    var filteredSourceColumnItems = sourceColumnItems.filter((item) => item.id != result.draggableId);
+
+    // Adicionar o mesmo na nova posição.
+    if (result.source.droppableId == result.destination.droppableId) {
+      filteredSourceColumnItems.splice(result.destination.index, 0, draggedItem);
+
+      // Mudar o state
+      var columnsCopy = JSON.parse(JSON.stringify(columns));
+      columnsCopy[sourceColumnId].items = filteredSourceColumnItems;
+      setColumns(columnsCopy);
+    } else {
+      destinationColumnItems.splice(result.destination.index, 0, draggedItem);
+      // Mudar o state
+      var columnsCopy = JSON.parse(JSON.stringify(columns));
+      columnsCopy[sourceColumnId].items = filteredSourceColumnItems;
+      columnsCopy[destinationColumnId].items = destinationColumnItems;
+      setColumns(columnsCopy);
+    }
+  };
 
   return (
     <div  style={{
