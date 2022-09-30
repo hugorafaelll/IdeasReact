@@ -37,33 +37,7 @@ const inicialColumns = [
 function App() {
   const [columns, setColumns] = useState(inicialColumns);
 
-  const onDragEnd = (result) => {
-    console.log(result);
-    // var sourceColumnItems = columns[0].items;
-    var sourceColumnItems = [];
-    var destinationColumnItems = [];
-    var draggedItem = {};
 
-    var sourceColumnId = 0;
-    var destinationColumnId = 0;
-
-    for (var i in columns) {
-      if (columns[i].id == result.source.droppableId) {
-        sourceColumnItems = columns[i].items;
-        sourceColumnId = i;
-      } else if (columns[i].id == result.destination.droppableId) {
-        destinationColumnItems = columns[i].items;
-        destinationColumnId = i;
-      }
-    }
-    // console.log(sourceColumnItems)
-    // console.log(destinationColumnItems)
-
-    for (var i in sourceColumnItems) {
-      if (sourceColumnItems[i].id == result.draggableId) {
-        draggedItem = sourceColumnItems[i];
-      }
-    }
     // Excluí o objeto arrastado.
     var filteredSourceColumnItems = sourceColumnItems.filter((item) => item.id != result.draggableId);
 
@@ -82,9 +56,8 @@ function App() {
       columnsCopy[sourceColumnId].items = filteredSourceColumnItems;
       columnsCopy[destinationColumnId].items = destinationColumnItems;
       setColumns(columnsCopy);
-    }
-  };
-
+    
+  
   return (
     <div  style={{
       display: "flex",
