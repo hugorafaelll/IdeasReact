@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Droppable } from "react-beautiful-dnd";
@@ -35,27 +36,7 @@ const inicialColumns = [
 ];
 
 function App() {
-  const [columns, setColumns] = useState(inicialColumns);
 
-
-    // Excluí o objeto arrastado.
-    var filteredSourceColumnItems = sourceColumnItems.filter((item) => item.id != result.draggableId);
-
-    // Adicionar o mesmo na nova posição.
-    if (result.source.droppableId == result.destination.droppableId) {
-      filteredSourceColumnItems.splice(result.destination.index, 0, draggedItem);
-
-      // Mudar o state
-      var columnsCopy = JSON.parse(JSON.stringify(columns));
-      columnsCopy[sourceColumnId].items = filteredSourceColumnItems;
-      setColumns(columnsCopy);
-    } else {
-      destinationColumnItems.splice(result.destination.index, 0, draggedItem);
-      // Mudar o state
-      var columnsCopy = JSON.parse(JSON.stringify(columns));
-      columnsCopy[sourceColumnId].items = filteredSourceColumnItems;
-      columnsCopy[destinationColumnId].items = destinationColumnItems;
-      setColumns(columnsCopy);
     
   
   return (
@@ -106,4 +87,6 @@ function App() {
   );
 }
 
-export default App;
+
+
+export default App; 
