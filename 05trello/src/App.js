@@ -5,9 +5,9 @@ import { Droppable } from "react-beautiful-dnd";
 import { Draggable } from "react-beautiful-dnd";
 
 const inicialItems = [
-  { id: "1", content: "Conteúdo 1" },
+  { id: "1", content: "primeiro conteudo" },
   { id: "2", content: "Conteúdo 2" },
-  { id: "3", content: "Conteúdo 3" },
+  { id: "3", content: "terceiro" },
 ];
 
 const inicialColumns = [
@@ -37,10 +37,8 @@ function App() {
   const [columns, setColumns] = useState(inicialColumns);
 
   const onDragEnd = (result) => {
-    console.log(result);
     let sourceColumnsItens = columns[0].items; //acessando itens da primeira coluna
     let draggedItem = {};
-    console.log("foi");
 
     for (var i in sourceColumnsItens) {
       if (sourceColumnsItens[i].id == result.draggableId) {
@@ -54,8 +52,23 @@ function App() {
     );
 
     // adicionar o mesmo em uma nova posição
-    filteredSourceColumnsItens.splice(1, 0, {});
+    filteredSourceColumnsItens.splice(result.destination.index, 0, draggedItem);
+
+  // mudar o state
+// let columnsCopy = columns;
+// columnsCopy[0].items = filteredSourceColumnsItens    
+// setColumns(columnsCopy)
+
+let columnsCopy = JSON.parse(JSON.stringify(columns));
+columnsCopy[0].items = filteredSourceColumnsItens
+setColumns(columnsCopy)
+
+
+
+
   };
+  
+
 
   return (
     <div
@@ -66,6 +79,8 @@ function App() {
     >
       <DragDropContext onDragEnd={onDragEnd}>
         {columns.map((column) => (
+          <div style={{display:'flex', flexDirection:'column', alignItems:'center' }}>
+          <h1>{column.name}</h1>
           <Droppable droppableId={column.id} key={column.id}>
             {(provided) => (
               <div
@@ -76,7 +91,7 @@ function App() {
                   alignItems: "center",
                 }}
               >
-                <h1>{column.name}</h1>
+         
                 <div
                   style={{
                     backgroundColor: "#2c3e50",
@@ -116,6 +131,7 @@ function App() {
               </div>
             )}
           </Droppable>
+          </div>
         ))}
       </DragDropContext>
     </div>
