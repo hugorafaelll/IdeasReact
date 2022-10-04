@@ -37,8 +37,27 @@ function App() {
   const [columns, setColumns] = useState(inicialColumns);
 
   const onDragEnd = (result) => {
-    let sourceColumnsItens = columns[0].items; //acessando itens da primeira coluna
+   // let sourceColumnsItens = columns[0].items; //acessando itens da primeira coluna
     let draggedItem = {};
+    let sourceColumnsItens = {}
+    let destinationColumnsItems = {}
+
+
+
+    for (var i in columns){
+      if (columns[i].id == result.source.droppableId){
+        sourceColumnsItens = columns[i].items
+      }else if
+        (columns[i].id == result.destination.droppableId){
+          destinationColumnsItems = columns[i].items
+        }
+      }
+    
+
+
+
+
+
 
     for (var i in sourceColumnsItens) {
       if (sourceColumnsItens[i].id == result.draggableId) {
@@ -91,7 +110,6 @@ setColumns(columnsCopy)
                   alignItems: "center",
                 }}
               >
-         
                 <div
                   style={{
                     backgroundColor: "#2c3e50",
