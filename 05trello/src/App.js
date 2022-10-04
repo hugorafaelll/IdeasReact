@@ -18,58 +18,92 @@ const inicialColumns = [
   },
   {
     name: "To do",
-    id:'222',
-    items:[]
-  
+    id: "222",
+    items: [],
   },
   {
     name: "In Process",
-    id:'223',
-    items:[]
-  
+    id: "223",
+    items: [],
   },
   {
     name: "Done",
-    id:'227',
-    items:[]
+    id: "227",
+    items: [],
   },
 ];
 
 function App() {
+  const [columns, setColumns] = useState(inicialColumns);
 
-    
-  
+  const onDragEnd = (result) => {
+    console.log(result);
+    let sourceColumnsItens = columns[0].items; //acessando itens da primeira coluna
+    let draggedItem = {};
+    console.log("foi");
+
+    for (var i in sourceColumnsItens) {
+      if (sourceColumnsItens[i].id == result.draggableId) {
+        draggedItem = sourceColumnsItens[i];
+      }
+    }
+
+    // EXCLUIR O OBJETO ARRASTADO
+    let filteredSourceColumnsItens = sourceColumnsItens.filter(
+      (item) => item.id !== result.draggableId
+    );
+
+    // adicionar o mesmo em uma nova posição
+    filteredSourceColumnsItens.splice(1, 0, {});
+  };
+
   return (
-    <div  style={{
-      display: "flex",
-      justifyContent: "center",
-    
-    }} >
-      <DragDropContext>
-        {inicialColumns.map((column) => (
-          <Droppable droppableId={column.id}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <DragDropContext onDragEnd={onDragEnd}>
+        {columns.map((column) => (
+          <Droppable droppableId={column.id} key={column.id}>
             {(provided) => (
               <div
                 ref={provided.innerRef}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
                 <h1>{column.name}</h1>
-                <div style={{ backgroundColor: "#2c3e50", margin:8, width: 250, minHeight: 500, padding: 10 }}>
-                  {column.items.map((item, index)  => (
-                    <Draggable draggableId={item.id} index={index} key={item.id} >
-                      {(provided) => (
+                <div
+                  style={{
+                    backgroundColor: "#2c3e50",
+                    margin: 8,
+                    width: 250,
+                    minHeight: 500,
+                    padding: 10,
+                  }}
+                >
+                  {column.items.map((item, index) => (
+                    <Draggable
+                      draggableId={item.id}
+                      index={index}
+                      key={item.id}
+                    >
+                      {(provided, snapshot) => (
                         <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
                           style={{
-                            textAlign:'center',
+                            textAlign: "center",
                             backgroundColor: "#27ae60",
-                            color:"white",
+                            color: "white",
                             height: 40,
                             marginBottom: 10,
                             ...provided.draggableProps.style,
-
                           }}
                         >
                           {item.content}
@@ -77,6 +111,7 @@ function App() {
                       )}
                     </Draggable>
                   ))}
+                  {provided.placeholder}
                 </div>
               </div>
             )}
@@ -87,6 +122,4 @@ function App() {
   );
 }
 
-
-
-export default App; 
+export default App;
