@@ -1,10 +1,9 @@
-import { Container, List} from "@mui/material";
+import { Container, List } from "@mui/material";
 import React, { useState } from "react";
 import Form from "../components/Form";
 import ResponsiveAppBar from "../components/navbar";
 import TodoItem from "../components/TodoItem";
 import ListItemIcon from "@mui/material";
-
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
@@ -46,8 +45,6 @@ export default function Home() {
           ))}
         </List>
       </div>
-
-  
     </Container>
   );
 }

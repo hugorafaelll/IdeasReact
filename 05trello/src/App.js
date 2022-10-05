@@ -3,6 +3,9 @@ import { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Droppable } from "react-beautiful-dnd";
 import { Draggable } from "react-beautiful-dnd";
+import { Container, Paper } from "@mui/material";
+import "./app.css";
+import NavBar from "./components/navbar";
 
 const inicialItems = [
   { id: "1", content: "primeiro conteudo" },
@@ -22,7 +25,7 @@ const inicialColumns = [
     items: [],
   },
   {
-    name: "In Process",
+    name: "On Process",
     id: "223",
     items: [],
   },
@@ -98,75 +101,81 @@ function App() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <DragDropContext onDragEnd={onDragEnd}>
-        {columns.map((column) => (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <h1>{column.name}</h1>
-            <Droppable droppableId={column.id} key={column.id}>
-              {(provided) => (
-                <div
-                  ref={provided.innerRef}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
+    <Container>
+      <NavBar />
+      <Paper
+        elevation={16}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: 45,
+        }}
+      >
+        <DragDropContext onDragEnd={onDragEnd}>
+          {columns.map((column) => (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <h1>{column.name}</h1>
+
+              <Droppable droppableId={column.id} key={column.id}>
+                {(provided) => (
                   <div
+                    ref={provided.innerRef}
                     style={{
-                      backgroundColor: "#2c3e50",
-                      margin: 8,
-                      width: 250,
-                      minHeight: 500,
-                      padding: 10,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
                     }}
                   >
-                    {column.items.map((item, index) => (
-                      <Draggable
-                        draggableId={item.id}
-                        index={index}
-                        key={item.id}
-                      >
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={{
-                              textAlign: "center",
-                              backgroundColor: "#27ae60",
-                              color: "white",
-                              height: 40,
-                              marginBottom: 10,
-                              ...provided.draggableProps.style,
-                            }}
-                          >
-                            {item.content}
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
+                    <div
+                      style={{
+                        backgroundColor: "#e1eae9",
+                        margin: 8,
+                        width: 250,
+                        minHeight: 500,
+                        padding: 10,
+                      }}
+                    >
+                      {column.items.map((item, index) => (
+                        <Draggable
+                          draggableId={item.id}
+                          index={index}
+                          key={item.id}
+                        >
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={{
+                                textAlign: "center",
+                                backgroundColor: "#27ae60",
+                                color: "white",
+                                height: 40,
+                                marginBottom: 10,
+                                ...provided.draggableProps.style,
+                              }}
+                            >
+                              {item.content}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
                   </div>
-                </div>
-              )}
-            </Droppable>
-          </div>
-        ))}
-      </DragDropContext>
-    </div>
+                )}
+              </Droppable>
+            </div>
+          ))}
+        </DragDropContext>
+      </Paper>
+    </Container>
   );
 }
 
