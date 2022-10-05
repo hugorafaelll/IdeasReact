@@ -6,6 +6,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { Container, Paper } from "@mui/material";
 import "./app.css";
 import NavBar from "./components/navbar";
+import Form from "./components/form";
 
 const inicialItems = [
   { id: "1", content: "primeiro conteudo" },
@@ -15,7 +16,7 @@ const inicialItems = [
 
 const inicialColumns = [
   {
-    name: "Required",
+    name: <Form />,
     id: "221",
     items: inicialItems,
   },
