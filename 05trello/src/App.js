@@ -37,27 +37,26 @@ function App() {
   const [columns, setColumns] = useState(inicialColumns);
 
   const onDragEnd = (result) => {
-   // let sourceColumnsItens = columns[0].items; //acessando itens da primeira coluna
+    // let sourceColumnsItens = columns[0].items; //acessando itens da primeira coluna
     let draggedItem = {};
-    let sourceColumnsItens = {}
-    let destinationColumnsItems = {}
+    let sourceColumnsItens = [];
+    let destinationColumnsItems = [];
 
+    let sourceColumnId = 0;
+    let destinationColumnId = 0;
 
-
-    for (var i in columns){
-      if (columns[i].id == result.source.droppableId){
-        sourceColumnsItens = columns[i].items
-      }else if
-        (columns[i].id == result.destination.droppableId){
-          destinationColumnsItems = columns[i].items
-        }
+    for (var i in columns) {
+      if (columns[i].id == result.source.droppableId) {
+        sourceColumnsItens = columns[i].items;
+        sourceColumnId = i;
+      } else if (columns[i].id == result.destination.droppableId) {
+        destinationColumnsItems = columns[i].items;
+        destinationColumnId = i;
       }
-    
+    }
 
-
-
-
-
+    console.log(sourceColumnsItens);
+    console.log(destinationColumnsItems);
 
     for (var i in sourceColumnsItens) {
       if (sourceColumnsItens[i].id == result.draggableId) {
@@ -71,23 +70,32 @@ function App() {
     );
 
     // adicionar o mesmo em uma nova posição
-    filteredSourceColumnsItens.splice(result.destination.index, 0, draggedItem);
+    if (result.source.droppableId == result.destination.droppableId) {
+      filteredSourceColumnsItens.splice(
+        result.destination.index,
+        0,
+        draggedItem
+      );
 
-  // mudar o state
-// let columnsCopy = columns;
-// columnsCopy[0].items = filteredSourceColumnsItens    
-// setColumns(columnsCopy)
+      let columnsCopy = JSON.parse(JSON.stringify(columns));
+      columnsCopy[sourceColumnId].items = filteredSourceColumnsItens;
+      setColumns(columnsCopy);
+    } else {
+      destinationColumnsItems.splice(result.destination.index, 0, draggedItem);
 
-let columnsCopy = JSON.parse(JSON.stringify(columns));
-columnsCopy[0].items = filteredSourceColumnsItens
-setColumns(columnsCopy)
+      let columnsCopy = JSON.parse(JSON.stringify(columns));
+      columnsCopy[sourceColumnId].items = filteredSourceColumnsItens;
+      columnsCopy[destinationColumnId].items = destinationColumnsItems;
+      setColumns(columnsCopy);
+    }
 
+    console.log(result);
 
-
-
+    //  // mudar o state
+    // let columnsCopy = columns;
+    // columnsCopy[0].items = filteredSourceColumnsItens
+    // setColumns(columnsCopy)
   };
-  
-
 
   return (
     <div
@@ -98,57 +106,63 @@ setColumns(columnsCopy)
     >
       <DragDropContext onDragEnd={onDragEnd}>
         {columns.map((column) => (
-          <div style={{display:'flex', flexDirection:'column', alignItems:'center' }}>
-          <h1>{column.name}</h1>
-          <Droppable droppableId={column.id} key={column.id}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <h1>{column.name}</h1>
+            <Droppable droppableId={column.id} key={column.id}>
+              {(provided) => (
                 <div
+                  ref={provided.innerRef}
                   style={{
-                    backgroundColor: "#2c3e50",
-                    margin: 8,
-                    width: 250,
-                    minHeight: 500,
-                    padding: 10,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
                   }}
                 >
-                  {column.items.map((item, index) => (
-                    <Draggable
-                      draggableId={item.id}
-                      index={index}
-                      key={item.id}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={{
-                            textAlign: "center",
-                            backgroundColor: "#27ae60",
-                            color: "white",
-                            height: 40,
-                            marginBottom: 10,
-                            ...provided.draggableProps.style,
-                          }}
-                        >
-                          {item.content}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
+                  <div
+                    style={{
+                      backgroundColor: "#2c3e50",
+                      margin: 8,
+                      width: 250,
+                      minHeight: 500,
+                      padding: 10,
+                    }}
+                  >
+                    {column.items.map((item, index) => (
+                      <Draggable
+                        draggableId={item.id}
+                        index={index}
+                        key={item.id}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={{
+                              textAlign: "center",
+                              backgroundColor: "#27ae60",
+                              color: "white",
+                              height: 40,
+                              marginBottom: 10,
+                              ...provided.draggableProps.style,
+                            }}
+                          >
+                            {item.content}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
                 </div>
-              </div>
-            )}
-          </Droppable>
+              )}
+            </Droppable>
           </div>
         ))}
       </DragDropContext>
