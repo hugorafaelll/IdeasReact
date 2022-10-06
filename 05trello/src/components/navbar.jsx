@@ -15,7 +15,7 @@ const NavBar = () => {
             component="a"
             href="/"
             sx={{
-              mr: 7,
+              mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "Silkscreen",
               fontWeight: 600,

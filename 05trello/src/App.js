@@ -16,14 +16,9 @@ const inicialItems = [
 
 const inicialColumns = [
   {
-    name: <Form />,
-    id: "221",
-    items: inicialItems,
-  },
-  {
     name: "To do",
     id: "222",
-    items: [],
+    items: inicialItems,
   },
   {
     name: "On Process",
@@ -109,7 +104,7 @@ function App() {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: 45,
+          marginTop: 22,
         }}
       >
         <DragDropContext onDragEnd={onDragEnd}>

@@ -9,10 +9,15 @@ import Slide from "@mui/material/Slide";
 import { TextField } from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function EditTodoDialog({ open, dialogHandler, todo, editTodo }) {
+export default function EditTodoDialog({
+  open,
+  dialogHandler,
+  todo,
+  editTodo,
+}) {
   const [editedText, setEditedText] = React.useState(todo.text);
 
   const textHandler = () => {

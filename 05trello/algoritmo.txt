@@ -1,0 +1,11 @@
+todo + 
+
+se clica no +
+abre um modal / dialog
+
+text fild 
+button 
+
+pega a informação do text fild e joga no array 
+
+array faz um map e joga na tela 
