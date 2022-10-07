@@ -6,12 +6,14 @@ import { Draggable } from "react-beautiful-dnd";
 import { Container, Paper } from "@mui/material";
 import "./app.css";
 import NavBar from "./components/navbar";
-import Form from "./components/form";
+import FormDialog from "./components/dialog";
 
 const inicialItems = [
   { id: "1", content: "primeiro conteudo" },
   { id: "2", content: "Conteúdo 2" },
   { id: "3", content: "terceiro" },
+  { id: "4", content: "quarto" },
+  { id: "5", content: "quinto" },
 ];
 
 const inicialColumns = [
@@ -36,6 +38,7 @@ function App() {
   const [columns, setColumns] = useState(inicialColumns);
 
   const onDragEnd = (result) => {
+    //movimentação dos cards
     // let sourceColumnsItens = columns[0].items; //acessando itens da primeira coluna
     let draggedItem = {};
     let sourceColumnsItens = [];
@@ -53,9 +56,6 @@ function App() {
         destinationColumnId = i;
       }
     }
-
-    console.log(sourceColumnsItens);
-    console.log(destinationColumnsItems);
 
     for (var i in sourceColumnsItens) {
       if (sourceColumnsItens[i].id == result.draggableId) {
@@ -87,18 +87,12 @@ function App() {
       columnsCopy[destinationColumnId].items = destinationColumnsItems;
       setColumns(columnsCopy);
     }
-
-    console.log(result);
-
-    //  // mudar o state
-    // let columnsCopy = columns;
-    // columnsCopy[0].items = filteredSourceColumnsItens
-    // setColumns(columnsCopy)
   };
 
   return (
-    <Container>
+    <Container maxWidth="md">
       <NavBar />
+      <FormDialog />
       <Paper
         elevation={16}
         style={{
@@ -150,6 +144,10 @@ function App() {
                               {...provided.dragHandleProps}
                               style={{
                                 textAlign: "center",
+                                alignContent: "center",
+                                alignItems: "baseline",
+                                alignSelf: "center",
+                                paddingTop: "1em",
                                 backgroundColor: "#27ae60",
                                 color: "white",
                                 height: 40,

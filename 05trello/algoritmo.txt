@@ -1,11 +1,14 @@
 todo + 
-
+https://mui.com/pt/material-ui/react-speed-dial/
 se clica no +
 abre um modal / dialog
 
-text fild 
+contendo um 
+text fild /
 button 
 
+press ok 
 pega a informação do text fild e joga no array 
 
 array faz um map e joga na tela 
+edit item array 
